@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360177392639",
+    "project_id": "kappa-fit",
+    "storage_bucket": "kappa-fit.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360177392639:android:2ef95c4464f9d96b6be5ca",
+        "android_client_info": {
+          "package_name": "com.example.trabajofinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi7sIXRIGwoFFOd2wNniNbgDymRyr7OT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
