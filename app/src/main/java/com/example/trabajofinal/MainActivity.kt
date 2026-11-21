@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
-        val tvForgot = findViewById<TextView>(R.id.tvForgot)
 
         // Abre la pantalla de registro
         btnRegister.setOnClickListener {
@@ -77,20 +75,5 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        // Recuperar contraseña por correo
-        tvForgot.setOnClickListener {
-            val email = etEmail.text.toString().trim()
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                etEmail.error = "Escribe tu correo primero"
-                return@setOnClickListener
-            }
-            auth.sendPasswordResetEmail(email)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Te enviamos un correo para restablecerla", Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "No se pudo enviar el correo", Toast.LENGTH_LONG).show()
-                }
         }
     }
-}

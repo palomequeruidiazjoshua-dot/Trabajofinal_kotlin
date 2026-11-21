@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
             return
         }
 
-        // Saludo con el primer nombre guardado en Firestore
         val tvSaludo = findViewById<TextView>(R.id.tvSaludo)
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get()
             .addOnSuccessListener { doc ->
@@ -40,7 +38,6 @@ class HomeActivity : AppCompatActivity() {
                 tvSaludo.text = if (primerNombre.isNotEmpty()) "A por más, $primerNombre." else "A por más."
             }
 
-        // Cada grupo muscular abre su pantalla de registro de ejercicios
         mapOf(
             R.id.cardPecho to "Pecho",
             R.id.cardEspalda to "Espalda",
@@ -55,13 +52,14 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // Barra inferior
-        findViewById<TextView>(R.id.tabEntrenar).setOnClickListener {
-            Toast.makeText(this, "Elige un grupo muscular para registrar", Toast.LENGTH_SHORT).show()
+        findViewById<TextView>(R.id.tabHistorial).setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
         }
-        // Perfil = cerrar sesión por ahora (útil para probar)
+        findViewById<TextView>(R.id.tabRangos).setOnClickListener {
+            startActivity(Intent(this, RangosActivity::class.java))
+        }
         findViewById<TextView>(R.id.tabPerfil).setOnClickListener {
-            auth.signOut()
-            irAlLogin()
+            startActivity(Intent(this, PerfilActivity::class.java))
         }
     }
 

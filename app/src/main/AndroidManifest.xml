@@ -40,6 +40,18 @@
             android:name=".GrupoActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".HistorialActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RangosActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
