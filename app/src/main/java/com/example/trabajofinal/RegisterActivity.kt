@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
             val confirm = etConfirm.text.toString()
 
-            // Validaciones
+
             if (nombre.isEmpty()) {
                 etNombre.error = "Escribe tu nombre"
                 return@setOnClickListener
@@ -58,12 +58,10 @@ class RegisterActivity : AppCompatActivity() {
 
             btnCrear.isEnabled = false
 
-            // 1) Crea el usuario en Firebase Authentication
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener { result ->
                     val uid = result.user?.uid ?: return@addOnSuccessListener
 
-                    // 2) Guarda los datos del perfil en Firestore (SIN la contraseña)
                     val datos = hashMapOf(
                         "uid" to uid,
                         "nombre" to nombre,

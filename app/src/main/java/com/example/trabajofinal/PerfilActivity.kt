@@ -37,7 +37,6 @@ class PerfilActivity : AppCompatActivity() {
         val tvPeso = findViewById<TextView>(R.id.tvPerfilPeso)
         val tvMeses = findViewById<TextView>(R.id.tvPerfilMeses)
 
-        // Solo lectura: carga los datos guardados
         tvCorreo.text = auth.currentUser?.email.orEmpty()
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get()
             .addOnSuccessListener { doc ->
@@ -51,13 +50,11 @@ class PerfilActivity : AppCompatActivity() {
                 doc.getLong("mesesEntrenando")?.let { tvMeses.text = it.toString() }
             }
 
-        // Cerrar sesión
         findViewById<Button>(R.id.btnCerrarSesion).setOnClickListener {
             auth.signOut()
             irAlLogin()
         }
 
-        // Barra inferior
         findViewById<TextView>(R.id.tabInicio).setOnClickListener {
             finish()
         }

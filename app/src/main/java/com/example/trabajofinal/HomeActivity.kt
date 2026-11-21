@@ -51,7 +51,6 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // Barra inferior
         findViewById<TextView>(R.id.tabHistorial).setOnClickListener {
             startActivity(Intent(this, HistorialActivity::class.java))
         }

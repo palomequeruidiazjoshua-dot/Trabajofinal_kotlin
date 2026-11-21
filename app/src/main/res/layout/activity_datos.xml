@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/activity_datos.xml -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:textColor="#9A9A9A"
             android:textSize="12sp" />
 
-        <!-- 1. Edad -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,8 +86,6 @@
             android:text="Tu edad actual en años."
             android:textColor="#9A9A9A"
             android:textSize="10sp" />
-
-        <!-- 2. Altura -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,7 +132,6 @@
             android:textColor="#9A9A9A"
             android:textSize="10sp" />
 
-        <!-- 3. Peso -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -181,7 +178,7 @@
             android:textColor="#9A9A9A"
             android:textSize="10sp" />
 
-        <!-- 4. Tiempo entrenando -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

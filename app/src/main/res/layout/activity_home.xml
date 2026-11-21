@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/activity_home.xml -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Pecho -->
+
             <LinearLayout
                 android:id="@+id/cardPecho"
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Espalda -->
+
             <LinearLayout
                 android:id="@+id/cardEspalda"
                 android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Pierna -->
+
             <LinearLayout
                 android:id="@+id/cardPierna"
                 android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                     android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Brazo -->
+
             <LinearLayout
                 android:id="@+id/cardBrazo"
                 android:layout_width="match_parent"
@@ -178,7 +178,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Barra inferior -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

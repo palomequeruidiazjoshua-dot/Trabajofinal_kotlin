@@ -1,5 +1,6 @@
 package com.example.trabajofinal
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -28,7 +29,6 @@ class RangosActivity : AppCompatActivity() {
         val indiceNivel: Int
     )
 
-    // 9 rangos estilo Symmetry: 8 con divisiones I, II, III + Simétrico (top)
     private val niveles = listOf(
         NivelRango("Hierro I", "#9CA3AF", 0.00),
         NivelRango("Hierro II", "#9CA3AF", 0.25),
@@ -57,7 +57,6 @@ class RangosActivity : AppCompatActivity() {
         NivelRango("Simétrico", "#22D3EE", 2.60)
     )
 
-    // Multiplicadores por grupo para equilibrar cargas (ej. Sentadilla mueve más peso que Curl)
     private val factorGrupo = mapOf(
         "Pecho" to 1.00,
         "Espalda" to 1.05,
@@ -76,6 +75,28 @@ class RangosActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvVolver).setOnClickListener { finish() }
+
+        findViewById<TextView>(R.id.tabInicio).setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+
+        findViewById<TextView>(R.id.tabHistorial).setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
+            finish()
+        }
+
+        findViewById<TextView>(R.id.tabRangos).setOnClickListener {
+        }
+
+        findViewById<TextView>(R.id.tabPerfil).setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid == null) {
@@ -104,7 +125,6 @@ class RangosActivity : AppCompatActivity() {
                             val reps = doc.getLong("reps") ?: 0L
                             if (peso <= 0 || reps <= 0) continue
 
-                            // Estimación de 1RM (fórmula de Epley)
                             val oneRm = peso * (1.0 + (reps.coerceAtMost(20) / 30.0))
                             val actual = mejorPorGrupo[grupo]?.first ?: 0.0
                             if (oneRm > actual) {

@@ -57,7 +57,6 @@ class HistorialActivity : AppCompatActivity() {
 
         cargarHistorial()
 
-        // Barra inferior
         findViewById<TextView>(R.id.tabInicio).setOnClickListener {
             finish()
         }

@@ -71,8 +71,6 @@ class DatosActivity : AppCompatActivity() {
                 "mesesEntrenando" to meses,
                 "perfilCompleto" to true
             )
-
-            // merge = agrega estos campos sin borrar nombre y correo
             db.collection("usuarios").document(uid).set(datos, SetOptions.merge())
                 .addOnSuccessListener {
                     startActivity(Intent(this, HomeActivity::class.java))

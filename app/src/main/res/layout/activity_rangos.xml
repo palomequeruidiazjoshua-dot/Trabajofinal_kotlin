@@ -46,7 +46,6 @@
                 android:textColor="#8E8E93"
                 android:textSize="13sp" />
 
-            <!-- Tarjeta Rango Global -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +103,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Tarjeta Pecho -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +157,6 @@
                     android:progressTint="#F87171" />
             </LinearLayout>
 
-            <!-- Tarjeta Espalda -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,7 +211,6 @@
                     android:progressTint="#4ADE80" />
             </LinearLayout>
 
-            <!-- Tarjeta Pierna -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -269,7 +265,6 @@
                     android:progressTint="#60A5FA" />
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -323,6 +318,63 @@
                     android:progressBackgroundTint="#262626"
                     android:progressTint="#FACC15" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#222222" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#0D0D0D"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tabInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Inicio"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tabHistorial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Historial"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tabRangos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Rangos"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tabPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Perfil"
+            android:textColor="#8E8E93"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

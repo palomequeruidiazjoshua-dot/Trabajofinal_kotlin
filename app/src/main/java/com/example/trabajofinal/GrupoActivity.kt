@@ -84,7 +84,7 @@ class GrupoActivity : AppCompatActivity() {
         tvTitulo.setTextColor(Color.parseColor(coloresPorGrupo[grupo] ?: "#FFFFFF"))
         findViewById<TextView>(R.id.tvVolver).setOnClickListener { finish() }
 
-        // Elegir ejercicio del grupo
+
         tvEjercicio.setOnClickListener {
             val lista = (ejerciciosPorGrupo[grupo] ?: emptyList()).toTypedArray()
             AlertDialog.Builder(this)
@@ -97,7 +97,7 @@ class GrupoActivity : AppCompatActivity() {
                 .show()
         }
 
-        // Guardar serie en Firestore: usuarios/{uid}/registros
+
         btnGuardar.setOnClickListener {
             val ejercicio = ejercicioElegido
             val peso = etPeso.text.toString().replace(",", ".").toDoubleOrNull()
@@ -132,7 +132,7 @@ class GrupoActivity : AppCompatActivity() {
             Toast.makeText(this, "Serie guardada", Toast.LENGTH_SHORT).show()
         }
 
-        // Historial del grupo en tiempo real
+
         val formato = SimpleDateFormat("d MMM · HH:mm", Locale("es", "CO"))
         listener = registros.whereEqualTo("grupo", grupo)
             .addSnapshotListener { snap, e ->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/activity_grupo.xml -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <!-- Peso -->
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Repeticiones -->
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
