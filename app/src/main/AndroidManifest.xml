@@ -44,6 +44,10 @@
             android:name=".HistorialActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".RangosActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

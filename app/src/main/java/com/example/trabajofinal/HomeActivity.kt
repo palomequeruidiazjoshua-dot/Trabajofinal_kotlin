@@ -55,10 +55,8 @@ class HomeActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tabHistorial).setOnClickListener {
             startActivity(Intent(this, HistorialActivity::class.java))
         }
-        // Perfil = cerrar sesión por ahora (útil para probar)
         findViewById<TextView>(R.id.tabPerfil).setOnClickListener {
-            auth.signOut()
-            irAlLogin()
+            startActivity(Intent(this, RangosActivity::class.java))
         }
     }
 
