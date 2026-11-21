@@ -57,15 +57,17 @@ class HistorialActivity : AppCompatActivity() {
 
         cargarHistorial()
 
+        // Barra inferior
         findViewById<TextView>(R.id.tabInicio).setOnClickListener {
             finish()
         }
-
+        findViewById<TextView>(R.id.tabRangos).setOnClickListener {
+            startActivity(Intent(this, RangosActivity::class.java))
+            finish()
+        }
         findViewById<TextView>(R.id.tabPerfil).setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            startActivity(Intent(this, PerfilActivity::class.java))
+            finish()
         }
     }
 
