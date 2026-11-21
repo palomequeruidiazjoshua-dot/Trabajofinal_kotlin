@@ -202,13 +202,13 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tabEntrenar"
+            android:id="@+id/tabHistorial"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:paddingVertical="16dp"
-            android:text="Entrenar"
+            android:text="Historial"
             android:textColor="#9A9A9A"
             android:textSize="12sp" />
 
