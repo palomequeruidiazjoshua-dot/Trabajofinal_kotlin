@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class RangosActivity : AppCompatActivity() {
 
@@ -76,6 +78,7 @@ class RangosActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.tvVolver).setOnClickListener { finish() }
 
+        // Barra inferior
         findViewById<TextView>(R.id.tabInicio).setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -88,14 +91,14 @@ class RangosActivity : AppCompatActivity() {
             finish()
         }
 
+        // Rangos es la pantalla actual: no hace nada
         findViewById<TextView>(R.id.tabRangos).setOnClickListener {
         }
 
+        // Perfil abre la pantalla de perfil (ya no cierra sesión)
         findViewById<TextView>(R.id.tabPerfil).setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            startActivity(Intent(this, PerfilActivity::class.java))
+            finish()
         }
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -158,7 +161,37 @@ class RangosActivity : AppCompatActivity() {
                             findViewById(R.id.pbBrazo)
                         )
 
-                        actualizarRangoGlobal(listOfNotNull(resPecho, resEspalda, resPierna, resBrazo))
+                        val nombreGlobal = actualizarRangoGlobal(
+                            listOfNotNull(resPecho, resEspalda, resPierna, resBrazo)
+                        )
+
+                        // Guarda el resultado del cálculo en Firestore (usuarios/{uid})
+                        val resultados = mapOf(
+                            "Pecho" to resPecho,
+                            "Espalda" to resEspalda,
+                            "Pierna" to resPierna,
+                            "Brazo" to resBrazo
+                        )
+                        val rangosPorGrupo = hashMapOf<String, Any>()
+                        for ((g, res) in resultados) {
+                            if (res != null) {
+                                val unRm = mejorPorGrupo[g]?.first ?: 0.0
+                                rangosPorGrupo[g] = hashMapOf(
+                                    "rango" to res.nombre,
+                                    "progreso" to res.progresoSiguiente,
+                                    "unRmEstimado" to (Math.round(unRm * 10) / 10.0)
+                                )
+                            }
+                        }
+                        val datosRango = hashMapOf<String, Any>(
+                            "rangoGlobal" to nombreGlobal,
+                            "rangosPorGrupo" to rangosPorGrupo,
+                            "rangoActualizado" to FieldValue.serverTimestamp()
+                        )
+                        userRef.set(datosRango, SetOptions.merge())
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "No se pudo guardar el rango: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                            }
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "Error al cargar registros: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
@@ -199,7 +232,7 @@ class RangosActivity : AppCompatActivity() {
         return resultado
     }
 
-    private fun actualizarRangoGlobal(resultados: List<ResultadoRango>) {
+    private fun actualizarRangoGlobal(resultados: List<ResultadoRango>): String {
         val tvGlobal = findViewById<TextView>(R.id.tvRangoGlobal)
         val tvDetalleGlobal = findViewById<TextView>(R.id.tvDetalleGlobal)
         val pbGlobal = findViewById<ProgressBar>(R.id.pbGlobal)
@@ -209,7 +242,7 @@ class RangosActivity : AppCompatActivity() {
             tvGlobal.setTextColor(Color.parseColor("#8E8E93"))
             tvDetalleGlobal.text = "Completa al menos 1 serie para obtener tu rango global"
             pbGlobal.progress = 0
-            return
+            return "Sin clasificar"
         }
 
         val promedioIndice = resultados.map { it.indiceNivel }.average().toInt().coerceIn(0, niveles.lastIndex)
@@ -222,6 +255,7 @@ class RangosActivity : AppCompatActivity() {
         tvDetalleGlobal.text = "${resultados.size} de 4 grupos musculares clasificados"
         pbGlobal.progress = promedioProgreso
         pbGlobal.progressTintList = ColorStateList.valueOf(color)
+        return nivelGlobal.nombre
     }
 
     private fun calcularRango(ratio: Double): ResultadoRango {
